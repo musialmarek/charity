@@ -15,14 +15,14 @@
 <section id="stats" class="stats">
     <div class="container container--85">
         <div class="stats--item">
-            <em>10</em>
+            <em th:text="${allBags}">10</em>
             <h3 th:text="#{number.of.bags}">Oddanych worków</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius est beatae, quod accusamus illum
                 tempora!</p>
         </div>
 
         <div class="stats--item">
-            <em>5</em>
+            <em th:text="${allGifts}">5</em>
             <h3 th:text="#{number.of.donations}">Przekazanych darów</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam magnam, sint nihil cupiditate quas
                 quam.</p>
@@ -80,13 +80,15 @@
             Możesz sprawdzić czym się zajmują.</p>
         <ul class="help--slides-items">
             <li>
-                <div th:if="${count.count%2==0}" class="col" th:each="institution,count: ${institutions}" th:object="${institution}">
+                <div th:if="${count.count%2==0}" class="col" th:each="institution,count: ${institutions}"
+                     th:object="${institution}">
                     <div class="title" th:text="*{name}"></div>
                     <div class="subtitle" th:text="*{description}"></div>
                 </div>
             </li>
             <li>
-                <div th:if="${count.count%2!=0}" class="col" th:each="institution,count: ${institutions}" th:object="${institution}">
+                <div th:if="${count.count%2!=0}" class="col" th:each="institution,count: ${institutions}"
+                     th:object="${institution}">
                     <div class="title" th:text="*{name}"></div>
                     <div class="subtitle" th:text="*{description}"></div>
                 </div>
