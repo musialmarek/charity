@@ -15,8 +15,8 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        log.debug("\n ADDING LIST OF ALL FOUNDATIONS TO MODEL");
-        model.addAttribute("foundations", institutionService.getAll());
+        log.debug("\n ADDING LIST OF ALL INSTITUTIONS TO MODEL");
+        model.addAttribute("institutions", institutionService.getAll());
         return "index";
     }
 }
