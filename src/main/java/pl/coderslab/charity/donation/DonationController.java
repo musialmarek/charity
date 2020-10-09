@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.charity.category.CategoryService;
 import pl.coderslab.charity.model.Donation;
 
 @Controller
@@ -14,12 +15,15 @@ import pl.coderslab.charity.model.Donation;
 @RequestMapping("/donation/form")
 public class DonationController {
     private final DonationService donationService;
+    private final CategoryService categoryService;
 
     @GetMapping
     public String donationForm(Model model) {
         Donation donation = new Donation();
         log.debug("ADDING EMPTY DONATION TO MODEL");
         model.addAttribute("donation", donation);
+        log.debug("ADDING ALL CATEGORIES TO MODEL");
+        model.addAttribute("categories", categoryService.getAll());
         log.debug("SHOWING ADD-DONATION FORM");
         return "donation/form";
     }
