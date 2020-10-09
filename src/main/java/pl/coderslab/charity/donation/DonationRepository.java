@@ -11,4 +11,6 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 
     @Query("SELECT SUM (d.quantity) FROM Donation d WHERE d.pickUpDate < current_date ")
     Integer getNumberPickUpDonations();
+
+    Integer countDistinctBy();
 }

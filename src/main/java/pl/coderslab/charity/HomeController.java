@@ -20,9 +20,9 @@ public class HomeController {
         log.debug("\n ADDING LIST OF ALL INSTITUTIONS TO MODEL");
         model.addAttribute("institutions", institutionService.getAll());
         log.debug("\n ADDING NUMBER OF ALL BAGS TO MODEL");
-        model.addAttribute("allBags", donationService.numberOfAllBugs());
-        log.debug("\n ADDING NUMBER OF ALL PICK UP BAGS TO MODEL");
-        model.addAttribute("allGifts", donationService.numberOfAllDonations());
+        model.addAttribute("bags", donationService.numberOfAllBugs());
+        log.debug("\n ADDING NUMBER OF ALL DONATIONS");
+        model.addAttribute("donations", donationService.numberOfAllDonations());
         return "index";
     }
 }
