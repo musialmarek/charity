@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class DonationService {
     private final DonationRepository donationRepository;
 
-    public Integer numberOfAllBugs() {
+    public Integer numberOfAllBags() {
         log.debug("GETTING SUM OF DONATIONS QUANTITY");
         Integer numberOfAllDonations = donationRepository.getNumberOfAllDonations();
         if (numberOfAllDonations == null) {
