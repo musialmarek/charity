@@ -20,7 +20,7 @@ public class HomeController {
         log.debug("\n ADDING LIST OF ALL INSTITUTIONS TO MODEL");
         model.addAttribute("institutions", institutionService.getAll());
         log.debug("\n ADDING NUMBER OF ALL BAGS TO MODEL");
-        model.addAttribute("bags", donationService.numberOfAllBugs());
+        model.addAttribute("bags", donationService.numberOfAllBags());
         log.debug("\n ADDING NUMBER OF ALL DONATIONS");
         model.addAttribute("donations", donationService.numberOfAllDonations());
         return "index";
