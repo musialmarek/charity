@@ -9,9 +9,9 @@
                     <li><a href="#" th:text="#{logout}">Wyloguj</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="btn btn--small" onclick="window.location.href='/?lang=en'"
+            <li><a href="#" class="btn btn--small" onclick="window.location.href='?lang=en'"
                    th:text="#{lang.eng}"></a>
-                <a href="#" class="btn btn--small" onclick="window.location.href='/?lang=pl'"
+                <a href="#" class="btn btn--small" onclick="window.location.href='?lang=pl'"
                    th:text="#{lang.pl}"></a>
             </li>
         </ul>
@@ -32,8 +32,9 @@
 
     <div class="slogan container container--90">
         <div class="slogan--item">
-            <h1 th:text="#{dashboard.slogan.part.first}">
-                Oddaj rzeczy, których już nie chcesz<br/>
+            <h1>
+                <span th:text="#{dashboard.slogan.part.first}"></span>
+                <br/>
                 <span class="uppercase" th:text="#{dashboard.slogan.part.second}">potrzebującym</span>
             </h1>
 
