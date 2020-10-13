@@ -40,6 +40,7 @@ public class Donation {
     @Column(name = "pick_up_date")
     private LocalDate pickUpDate;
     @Column(name = "pick_up_time")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickUpTime;
     @Column(name = "picku_up_comment")
     private String pickUpComment;
