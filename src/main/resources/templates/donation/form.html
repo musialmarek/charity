@@ -36,21 +36,22 @@
     <div class="form--steps-container">
         <div class="form--steps-counter" th:utext="|#{form.step} <span>1</span>/4|">Krok <span>1</span>/4</div>
 
-        <form th:action="@{donation/form}" method="post" th:object="${donation}">
+        <form th:action="@{/donation/form}" method="post" th:object="${donation}">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
-
-                <div th:each="category: ${categories}" class="form-group form-group--checkbox">
+                <div th:each="category: ${categories}" class="form-group">
                     <label>
                         <input
                                 type="checkbox"
+                                name="categories"
+                                th:value="${category.id}"
                                 th:field="*{categories}"
-                                th:value="*{categories}"
+
                         />
                         <span class="checkbox"></span>
-                        <span class="description" th:text="${category.name}"
-                        ></span
+                        <span class="description"
+                              th:text="${category.name}"></span
                         >
                     </label>
                 </div>
@@ -72,7 +73,7 @@
                 </div>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <a th:href="@{/donation/edit}" type="button" class="btn prev-step">Wstecz</a>
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
@@ -84,7 +85,7 @@
 
                 <div th:each="organization: ${organizations}" class="form-group form-group--checkbox">
                     <label>
-                        <input type="radio" th:field="*{institution}" th:value="*{institution}"/>
+                        <input type="radio" th:field="*{institution}" th:value="${organization.id}"/>
                         <span class="checkbox radio"></span>
                         <span class="description">
                   <div class="title" th:text="${organization.name}"></div>
@@ -107,7 +108,8 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <input id="street" type="text" th:field="*{street}" th:value="*{street}"/> </label>
+                            <label> Ulica <input id="street" type="text" th:field="*{street}" th:value="*{street}"/>
+                            </label>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -116,7 +118,8 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <input id="zip-code" type="text" th:field="*{zipCode}" th:value="*{zipCode}"/>
+                                Kod pocztowy <input id="zip-code" type="text" th:field="*{zipCode}"
+                                                    th:value="*{zipCode}"/>
                             </label>
                         </div>
 
@@ -130,17 +133,20 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input id="date" type="date" th:field="*{pickUpDate}" th:value="*{pickUpDate}"/> </label>
+                            <label> Data <input id="date" type="date" th:field="*{pickUpDate}"
+                                                th:value="*{pickUpDate}"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <input id="time" type="time" th:field="*{pickUpTime}" th:value="*{pickUpTime}"/> </label>
+                            <label> Godzina <input id="time" type="time" th:field="*{pickUpTime}"
+                                                   th:value="*{pickUpTime}"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <textarea id="comment" th:field="*{pickUpComment}" th:value="*{pickUpComment}" rows="5"></textarea>
+                                <textarea id="comment" th:field="*{pickUpComment}" th:value="*{pickUpComment}"
+                                          rows="5"></textarea>
                             </label>
                         </div>
                     </div>
