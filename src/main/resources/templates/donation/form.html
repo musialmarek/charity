@@ -39,12 +39,14 @@
         <form th:action="@{/donation/form}" method="post" th:object="${donation}">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
-                <h3>Zaznacz co chcesz oddać:</h3>
+                <h3 th:text="#{form.categories}">Zaznacz co chcesz oddać:</h3>
                 <div th:each="category: ${categories}" class="form-group">
-                    <label>
+                    <label id="categories-checkboxes">
                         <input
                                 type="checkbox"
                                 name="categories"
+                                class="category"
+                                th:title="${category.name}"
                                 th:value="${category.id}"
                                 th:field="*{categories}"
 
@@ -57,94 +59,92 @@
                 </div>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="categories" type="button" class="btn next-step" th:text="#{next}">Dalej</button>
                 </div>
             </div>
 
             <!-- STEP 2 -->
             <div data-step="2">
-                <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
+                <h3 th:text="#{form.number.of.bags}">Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
 
                 <div class="form-group form-group--inline">
                     <label>
-                        Liczba 60l worków:
-                        <input type="number" th:field="*{quantity}" step="1" min="1"/>
+                        <span th:text="#{form.bags}">Liczba 60l worków:</span>
+                        <input id="quantity" type="number" th:field="*{quantity}" step="1" min="1"/>
                     </label>
                 </div>
 
                 <div class="form-group form-group--buttons">
-                    <a th:href="@{/donation/edit}" type="button" class="btn prev-step">Wstecz</a>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <a th:href="@{/donation/edit}" type="button" class="btn prev-step" th:text="#{go.back}">Wstecz</a>
+                    <button type="button" class="btn next-step" th:text="#{next}">Dalej</button>
                 </div>
             </div>
 
 
-            <!-- STEP 4 -->
+            <!-- STEP 3 -->
             <div data-step="3">
-                <h3>Wybierz organizacje, której chcesz pomóc:</h3>
+                <h3 th:text="#{about.action.whom}">Wybierz organizacje, której chcesz pomóc:</h3>
 
                 <div th:each="organization: ${organizations}" class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" th:field="*{institution}" th:value="${organization.id}"/>
+                    <label id="organizations">
+                        <input class="organization" th:title="${organization.name}" type="radio" th:field="*{institution}" th:value="${organization.id}"/>
                         <span class="checkbox radio"></span>
                         <span class="description">
-                  <div class="title" th:text="${organization.name}"></div>
-                  <div class="subtitle" th:text="${organization.description}"></div>
-                </span>
+                            <div class="title" th:text="${organization.name}"></div><div class="subtitle" th:text="${organization.description}"></div></span>
                     </label>
                 </div>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button type="button" class="btn prev-step" th:text="#{go.back}">Wstecz</button>
+                    <button id="organization" type="button" class="btn next-step" th:text="#{next}">Dalej</button>
                 </div>
             </div>
 
-            <!-- STEP 5 -->
+            <!-- STEP 4 -->
             <div data-step="4">
-                <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
+                <h3 th:text="#{about.action.courier}">Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
 
                 <div class="form-section form-section--columns">
                     <div class="form-section--column">
-                        <h4>Adres odbioru</h4>
+                        <h4 th:text="#{summary.address}">Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <input id="street" type="text" th:field="*{street}" th:value="*{street}"/>
+                            <label> <span th:text="#{address.street}">Ulica</span> <input id="street" type="text" th:field="*{street}" th:value="*{street}"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto <input id="city" type="text" th:field="*{city}" th:value="*{city}"/> </label>
+                            <label> <span th:text="#{address.city}">Miasto</span> <input id="city" type="text" th:field="*{city}" th:value="*{city}"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <input id="zip-code" type="text" th:field="*{zipCode}"
+                                <span th:text="#{address.zip.code}">Kod pocztowy</span> <input id="zip-code" type="text" th:field="*{zipCode}"
                                                     th:value="*{zipCode}"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <input id="phone" type="text" th:field="*{phone}" th:value="*{phone}"/>
+                                <span th:text="#{phone}">Numer telefonu</span> <input id="phone" type="text" th:field="*{phone}" th:value="*{phone}"/>
                             </label>
                         </div>
                     </div>
 
                     <div class="form-section--column">
-                        <h4>Termin odbioru</h4>
+                        <h4 th:text="#{pick.up.datetime}">Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input id="date" type="date" th:field="*{pickUpDate}"
+                            <label> <span th:text="#{date}">Data</span> <input id="date" type="date" th:field="*{pickUpDate}"
                                                 th:value="*{pickUpDate}"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <input id="time" type="time" th:field="*{pickUpTime}"
+                            <label> <span th:text="#{time}">Godzina</span> <input id="time" type="time" th:field="*{pickUpTime}"
                                                    th:value="*{pickUpTime}"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Uwagi dla kuriera
+                                <span th:text="#{courier.comment}">Uwagi dla kuriera</span>
                                 <textarea id="comment" th:field="*{pickUpComment}" th:value="*{pickUpComment}"
                                           rows="5"></textarea>
                             </label>
@@ -152,30 +152,33 @@
                     </div>
                 </div>
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button type="button" class="btn prev-step" th:text="#{go.back}">Wstecz</button>
+                    <button id="to-summary" type="button" class="btn next-step" th:text="#{next}">Dalej</button>
                 </div>
             </div>
 
-            <!-- STEP 6 -->
+            <!-- STEP 5 -->
             <div data-step="5">
-                <h3>Podsumowanie Twojej darowizny</h3>
+                <h3 th:text="#{donation.summary.header}">Podsumowanie Twojej darowizny</h3>
 
                 <div class="summary">
                     <div class="form-section">
-                        <h4>Oddajesz:</h4>
+                        <h4 th:text="#{donation.summary.giving}">Oddajesz:</h4>
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
-                                >
+                                <span class="summary--text" th:text="|#{number.of.bags} :   |">worki </span>
+                                <span class="summary--text" id="summary-quantity"></span>
+                            </li>
+                            <li>
+                                <span class="summary--text" th:text="#{summary.categories}"></span>
+                                <span class="summary--text" id="summary-categories"></span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
                                 <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
+                                      id="summary-organization"></span
                                 >
                             </li>
                         </ul>
@@ -183,21 +186,21 @@
 
                     <div class="form-section form-section--columns">
                         <div class="form-section--column">
-                            <h4>Adres odbioru:</h4>
+                            <h4 th:text="#{summary.address}">Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li id="summary-street">Prosta 51</li>
+                                <li id="summary-city">Warszawa</li>
+                                <li id="summary-zipcode">99-098</li>
+                                <li id="summary-phone">123 456 789</li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
-                            <h4>Termin odbioru:</h4>
+                            <h4 th:text="#{summary.date}">Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li id="summary-date">13/12/2018</li>
+                                <li id="summary-time">15:40</li>
+                                <li id="summary-comment">Brak uwag</li>
                             </ul>
                         </div>
                     </div>
@@ -205,7 +208,7 @@
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="submit" class="btn">Potwierdzam</button>
+                    <button type="submit" class="btn" th:text="#{summary.confirm}">Potwierdzam</button>
                 </div>
             </div>
         </form>
@@ -213,7 +216,8 @@
 </section>
 
 <footer th:include="fragments/main-page-footer :: main-page-footer"></footer>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script th:src="@{/js/summary.js}"></script>
 <script th:src="@{/js/app.js}"></script>
 </body>
 </html>
