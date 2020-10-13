@@ -3,6 +3,7 @@ package pl.coderslab.charity.donation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.coderslab.charity.model.Donation;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +22,9 @@ public class DonationService {
 
     public Integer numberOfAllDonations() {
         return donationRepository.countDistinctBy();
+    }
+
+    public Donation save(Donation donation) {
+        return donationRepository.save(donation);
     }
 }
