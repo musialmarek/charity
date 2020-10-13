@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -35,6 +36,7 @@ public class Donation {
     @Column(name = "zip_code")
     private String zipCode;
     private String phone;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "pick_up_date")
     private LocalDate pickUpDate;
     @Column(name = "pick_up_time")
